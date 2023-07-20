@@ -1,43 +1,28 @@
-function Cart() {
-    return (<div className="blackout" style={{ display: "none" }}>
+import remove from "../images/remove.svg";
+import arrowRight from "../images/arrow-right.svg";
+
+function Cart({ onClose, items = [] }) {
+    return (<div className="blackout">
         <div className="blackout__cart cart">
             <div className="cart__title">
                 <h2 className="cart__title-left">Корзина</h2>
-                <button className="cart__title-right">
-                    <img src="/img/cart-icons/1.svg" alt="remove" width={ 11 } height={ 11 } />
+                <button className="cart__title-right" onClick={ onClose } >
+                    <img src={ remove } alt="remove" width={ 11 } height={ 11 } />
                 </button>
             </div>
             <div className="cart__products">
-                <div className="cart__products-item item">
-                    <img src="/img/main-goods/1.jpg" alt="Товар" width={ 70 } height={ 70 } />
+            { items.map((item, i) => {
+                return (<div className="cart__products-item item" key={ i } >
+                    <img src={ item.src } alt="Товар" width={ 70 } height={ 70 } />
                     <p className="item__title">
-                        <span className="item__title-top">Мужские Кроссовки Nike Air Max 270</span>
-                        <span className="item__title-bottom">12 999 руб.</span>
+                        <span className="item__title-top">{ item.name }</span>
+                        <span className="item__title-bottom">{ item.price }</span>
                     </p>
                     <button className="item__btn">
-                        <img src="/img/cart-icons/1.svg" alt="remove" width={ 11 } height={ 11 } />
+                        <img src={ remove } alt="remove" width={ 11 } height={ 11 } />
                     </button>
-                </div>
-                <div className="cart__products-item item">
-                    <img src="/img/main-goods/1.jpg" alt="Товар" width={ 70 } height={ 70 } />
-                    <p className="item__title">
-                        <span className="item__title-top">Мужские Кроссовки Nike Air Max 270</span>
-                        <span className="item__title-bottom">12 999 руб.</span>
-                    </p>
-                    <button className="item__btn">
-                        <img src="/img/cart-icons/1.svg" alt="remove" width={ 11 } height={ 11 } />
-                    </button>
-                </div>
-                <div className="cart__products-item item">
-                    <img src="/img/main-goods/1.jpg" alt="Товар" width={ 70 } height={ 70 } />
-                    <p className="item__title">
-                        <span className="item__title-top">Мужские Кроссовки Nike Air Max 270</span>
-                        <span className="item__title-bottom">12 999 руб.</span>
-                    </p>
-                    <button className="item__btn">
-                        <img src="/img/cart-icons/1.svg" alt="remove" width={ 11 } height={ 11 } />
-                    </button>
-                </div>  
+                </div>)}
+            )}
             </div>
             <div className="cart__price">
                 <p className="cart__price-left">Итого:</p>
@@ -51,7 +36,7 @@ function Cart() {
             </div>
             <button className="cart__btn">
                 <span className="cart__btn-text">Оформить</span>
-                <img src="/img/cart-icons/2.svg" alt="buy" width="14px" height="12px" />
+                <img src={ arrowRight } alt="buy" width="14px" height="12px" />
             </button>
         </div>
     </div>)

@@ -19,8 +19,7 @@ body {
 }
 
 .item__btn,
-.cart__title-right,
-.product__bottom-btn {
+.cart__title-right {
     align-items: center;
     background: #ffffff;
     border-radius: 8px;
@@ -238,18 +237,15 @@ body {
 
     &__products {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         padding: 40px 0px;
 
         &-item {
             margin-right: 30px;
+            margin-bottom: 40px;
             height: 260px;
             width: 210px;
             transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-
-            &--last {
-                margin-right: 0px;
-            }
 
             &:hover {
                 box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
@@ -270,8 +266,8 @@ body {
     &__icon {
         cursor: pointer;
         position: absolute;
-        left: 25px;
-        top: 20px;
+        left: 30px;
+        top: 30px;
     }
 
     &__title {
@@ -286,6 +282,10 @@ body {
             display: flex;
             flex-direction: column;
         }
+
+        &-btn {
+            cursor: pointer;
+        }
     }
 }
 
@@ -294,6 +294,7 @@ body {
         color: #BDBDBD;
         font-weight: 500;
         font-size: 11px;
+        margin-bottom: 5px;
     }
 
     &__bottom {
