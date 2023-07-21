@@ -1,7 +1,7 @@
 import remove from "../images/remove.svg";
 import arrowRight from "../images/arrow-right.svg";
 
-function Cart({ onClose, items = [] }) {
+function Cart({ onClose, items = [], onRemove }) {
     return (<div className="blackout">
         <div className="blackout__cart cart">
             <div className="cart__title">
@@ -13,12 +13,12 @@ function Cart({ onClose, items = [] }) {
             <div className="cart__products">
             { items.map((item, i) => {
                 return (<div className="cart__products-item item" key={ i } >
-                    <img src={ item.src } alt="Товар" width={ 70 } height={ 70 } />
+                    <img src={ item.imageURL } alt="Товар" width={ 70 } height={ 70 } />
                     <p className="item__title">
-                        <span className="item__title-top">{ item.name }</span>
-                        <span className="item__title-bottom">{ item.price }</span>
+                        <span className="item__title-top">{ item.title }</span>
+                        <span className="item__title-bottom">{ `${item.price} руб.` }</span>
                     </p>
-                    <button className="item__btn">
+                    <button className="item__btn" onClick={ () => onRemove(item) } >
                         <img src={ remove } alt="remove" width={ 11 } height={ 11 } />
                     </button>
                 </div>)}
