@@ -5,17 +5,18 @@ import plusAdded from "../images/plus-added.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
 
-function Card({ imageURL, title, price, onAdd }) {
+function Card({ id, imageURL, title, price, onAdd, onLike, isInFavourites }) {
     const [isAdded, setIsAdded] = React.useState(false);
-    const [isLiked, setIsLiked] = React.useState(false);
+    const [isLiked, setIsLiked] = React.useState(isInFavourites);
 
     const onAddToCart = () => {
         setIsAdded(!isAdded);
-        onAdd();
+        onAdd({ id, imageURL, title, price });
     }
     
     const onAddToFavourite = () => {
         setIsLiked(!isLiked);
+        onLike({ id, imageURL, title, price });
     }
     
     return (<div className="content__products-item product" >

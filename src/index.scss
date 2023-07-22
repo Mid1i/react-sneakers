@@ -80,6 +80,40 @@ body {
         }
     }
 
+    &__empty {
+        align-items: center;
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        justify-content: center;
+
+        &-title {
+            font-weight: 600;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        &-text {
+            font-size: 16px;
+            line-height: 24px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        &-btn {
+            margin-top: 40px;
+            width: 245px;
+
+            & img {
+                left: 30px;
+            }
+
+            &:hover img {
+                transform: translateX(-5px);
+            }
+        }
+    }
+
     &__price,
     &__tax {
         display: flex;
@@ -101,7 +135,8 @@ body {
         }
     }
 
-    &__btn {
+    &__btn,
+    &__empty-btn {
         align-items: center;
         background: #9DD458;
         border-radius: 18px;
@@ -113,10 +148,6 @@ body {
 
         &:hover {
             background: lighten(#9DD458, 5%);
-
-            img {
-                transform: translateX(5px);
-            }
         }
 
         &:active {
@@ -132,9 +163,16 @@ body {
         & img {
             position: absolute;
             top: 40%;
-            right: 30px;
             transition: transform 0.1s ease-in-out;
         }
+    }
+
+    &__btn img {
+        right: 30px;
+    }
+
+    &__btn:hover img {
+        transform: translateX(5px);
     }
 }
 
@@ -211,9 +249,17 @@ body {
         display: flex;
         justify-content: space-between;
 
+        &--favourites {
+            justify-content: flex-start;
+        }
+
         &-title {
             font-weight: 700;
             font-size: 32px;
+        }
+
+        &-image {
+            margin-right: 20px;
         }
 
         &-search {
@@ -260,7 +306,7 @@ body {
     border-radius: 40px;
     display: flex;
     flex-direction: column;
-    padding: 20px 25px;
+    padding: 20px 25px 25px;
     position: relative;
 
     &__icon {
@@ -271,6 +317,7 @@ body {
     }
 
     &__title {
+        flex: 1 0 auto;
         margin: 14px 0px;
     }
 
