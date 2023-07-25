@@ -7,7 +7,7 @@ import plusAdded from "../images/plus-added.svg";
 import heartDefault from "../images/heart-default.svg";
 import heartLiked from "../images/heart-liked.svg";
 
-function Card({ id, imageURL, title, price }) {
+function Card({ id, imageURL, title, price, addBtn }) {
     const { isInCart, isInFavourites, onAddToCart, onAddToFavourites } = React.useContext(appContext);
     
     return (
@@ -27,14 +27,14 @@ function Card({ id, imageURL, title, price }) {
                     <p className="price__top">Цена:</p>
                     <p className="price__bottom"> { `${price} руб.` } </p>
                 </div>
-                <img 
+                { addBtn && <img 
                     className="product__bottom-btn" 
                     src={ isInCart(title) ? plusAdded : plusDefault } 
                     onClick={ () => onAddToCart({ id, imageURL, title, price }) } 
                     alt="buy" 
                     width={ 32 } 
                     height={ 32 } 
-                />
+                />}
             </div>
         </div>
     )

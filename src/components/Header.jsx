@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useCart } from "../hooks/useCart";
 import appContext from "../context";
 
 import logo from "../images/logo.svg";
@@ -10,6 +11,7 @@ import profile from "../images/profile.svg";
 
 function Header() {
     const { cartItems, setCartOpened } = React.useContext(appContext);
+    const { totalPrice} = useCart();
 
     return(<header className="header">
         <Link to="/" className="header__logo">
@@ -23,7 +25,7 @@ function Header() {
         <ul className="header__icons">
             <li className="header__icons-el" onClick={ () => setCartOpened(true) } >
                 <img src={ cart } alt="cart" width={ 20 } height={ 20 } />
-                <span>{ cartItems.length !== 0 && `${cartItems.reduce((sum, item) => sum + item.price, 0 )} руб.` }</span>
+                <span>{ cartItems.length !== 0 && `${totalPrice} руб.` }</span>
             </li>
             <li className="header__icons-el header__icons-el--middle">
                 <Link to="/favourites">
@@ -31,7 +33,9 @@ function Header() {
                 </Link>
             </li>
             <li className="header__icons-el">
-                <img src={ profile } alt="profile" width={ 20 } height={ 20 } />
+                <Link to="/profile">
+                    <img src={ profile } alt="profile" width={ 20 } height={ 20 } />
+                </Link>
             </li>       
         </ul>
     </header>)

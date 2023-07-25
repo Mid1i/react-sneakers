@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
+import Profile from "./pages/Profile";
 
 import Cart from "./components/Cart";
 import Header from "./components/Header";
@@ -14,20 +15,30 @@ function App() {
     const [items, setItems] = React.useState([]);
     const [likedItems, setLikedItems] = React.useState([]);
     const [cartItems, setCartItems] = React.useState([]);
+    const [ordersItems, setOrdersItems] = React.useState([]);
     const [isCartOpened, setCartOpened] = React.useState(false);
     const [searchValue, setSearchValue] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         async function fetchData() {
-            const cartResponse = await axios.get("https://64bc05a37b33a35a4446ef8a.mockapi.io/cart");
-            const favouritesResponse = await axios.get("https://64bc05a37b33a35a4446ef8a.mockapi.io/favourites");
-            const itemsResponse = await axios.get("https://64b9934679b7c9def6c13236.mockapi.io/items");
-
-            setCartItems(cartResponse.data);
-            setLikedItems(favouritesResponse.data);
-            setItems(itemsResponse.data);
-            setIsLoading(false);
+            try {
+                const [ cartResponse, favouritesResponse, itemsResponse, ordersItemsResponse ] = await Promise.all([
+                    axios.get("https://64bc05a37b33a35a4446ef8a.mockapi.io/cart"),
+                    axios.get("https://64bc05a37b33a35a4446ef8a.mockapi.io/favourites"),
+                    axios.get("https://64b9934679b7c9def6c13236.mockapi.io/items"),
+                    axios.get("https://64b9934679b7c9def6c13236.mockapi.io/orders")
+                ])
+                
+                setOrdersItems(ordersItemsResponse.data);
+                setCartItems(cartResponse.data);
+                setLikedItems(favouritesResponse.data);
+                setItems(itemsResponse.data);
+                setIsLoading(false);
+            } catch (error) {
+                alert ("Не удалось обработать запрос");
+                console.error(error);
+            }
         }
         fetchData();
     }, []);
@@ -42,8 +53,9 @@ function App() {
                 const { data } = await axios.post("https://64bc05a37b33a35a4446ef8a.mockapi.io/cart", item);
                 setCartItems(prev => [...prev, data]);
             }
-        } catch (err) {
-            alert("Не удалось выполнить запрос");
+        } catch (error) {
+            alert("Ошибка при добавлении в корзину");
+            console.error(error)
         }
     }
 
@@ -52,8 +64,9 @@ function App() {
             await axios.delete(`https://64bc05a37b33a35a4446ef8a.mockapi.io/cart/${id}`);
 
             setCartItems(prev => prev.filter((item) => item.id !== id));
-        } catch (err) {
-            alert("Не удалось выполнить запрос");
+        } catch (error) {
+            alert("Ошибка при удалении из корзины");
+            console.error(error);
         }
     }
 
@@ -67,8 +80,9 @@ function App() {
                 const { data } = await axios.post("https://64bc05a37b33a35a4446ef8a.mockapi.io/favourites", item);
                 setLikedItems(prev => [...prev, data]);
             }
-        } catch (err) {
-            alert("Не удалось выполнить запрос");
+        } catch (error) {
+            alert("Ошибка при добавлении в закладки");
+            console.error(error);
         }
     }
     
@@ -80,11 +94,16 @@ function App() {
 
     const isInFavourites = title => likedItems.find(obj => obj.title === title) ? true : false;
 
+    if (isCartOpened) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "auto";
+    }
+
     return (
-        <appContext.Provider value={{ items, cartItems, likedItems, isInCart, isInFavourites, setCartOpened, onAddToCart, onRemoveFromCart, onAddToFavourites }} >
-
-            { isCartOpened && <Cart /> }
-
+        <appContext.Provider value={{ items, cartItems, likedItems, ordersItems, isCartOpened, isInCart, isInFavourites, setCartOpened, onAddToCart, onRemoveFromCart, onAddToFavourites, setCartItems, setOrdersItems }} >
+            
+            <Cart />
             <Header />
 
             <Routes>
@@ -97,7 +116,11 @@ function App() {
                 />
 
                 <Route path="/favourites" exact element={ 
-                    <Favourites />} 
+                    <Favourites isLoading = { isLoading } />} 
+                />
+
+                <Route path="/profile" exact element={ 
+                    <Profile isLoading = { isLoading } />} 
                 />
             </Routes>
         </appContext.Provider>
