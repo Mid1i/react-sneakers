@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# React sneakers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание
 
-## Available Scripts
+React-sneakers — интернет-магазин кроссовок. Этот проект я написал для того, чтобы закрепить свои знания по React и попрактиковаться с React-router-dom. Также я впервые использовал React Skeleton и IntersectionObserver.
 
-In the project directory, you can run:
+## Функционал
 
-### `npm start`
+- доступен на мобильных устройствах,
+- у всех интерактивных элементов есть анимация,
+- регистрация и авторизация пользователя (стейт с заказами, кроссовками в закладках и корзине общий для всех пользователей),
+- отображение попапов при успешной и не очень регистрации,
+- отображение попапа с ошибкой при неудачном входе,
+- тексты ошибок в попапы прилетают с сервера,
+- валидация форм,
+- после авторизации в шапке отображается почта текущего пользователя,
+- вся информация о товарах (ссылки на фото, название, цена) подгружаются с сервера,
+- закладки, оформленные заказы, товары в корзине также сохраняются на сервере,
+- на сайте присутствует корзина, в которой можно увидеть итоговую сумму (цена товаров + доставка 5%), из нее также можно удалять товары
+- покупка кроссовок,
+- при оформлении заказа (его номер сохраняется), корзина очищается и он добавляется в соответствующий раздел,
+- при удалении/добавлении товара в корзину обновляется соответствующая кнопка на карточке, общая сумма в корзине и в шапке сайта,
+- при удалении всех закладок появляется сообщение с рандомным эмодзи (1 из 10),
+- сортировка товаров по цене,
+- поиск товаров по названию,
+- если поиск не дал результатов, то также появляется сообщение с рандомным эмодзи. Если продолжить вводить текст в строку поиска, то на каждый символ будет отображаться новый эмодзи,
+- при прокрутке до нижней части экрана автоматически происходит подгрузка новой порции товаров. Так будет происходить, пока товары не закончатся (всего их 100 шт.),
+- использование прелоадеров,
+- при клике на фото товара открывается попап с увеличенной фотографией.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Технологии
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React,
+- React Router,
+- React Skeleton,
+- Хуки (useState, useEffect, useContext, useRef),
+- использование кастомных хуков (валидация форм, блокировка скролла, хук для подсчета суммы заказа),
+- использование локального хранилища,
+- работа с API (mockapi),
+- HOC-компоненты, 
+- Intersection Observer API,
+- БЭМ,
+- контроль версий в Git с использованием веток.
 
-### `npm test`
+## Инструкция
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Чтобы запустить проект, нужно сделать несколько простых шагов.
 
-### `npm run build`
+- Создайте папку и перейдите в неё:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+cd <Имя-папки>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Склонируйте этот репозиторий:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/Mid1i/react-sneakers.git
+```
 
-### `npm run eject`
+- Установите все зависимости:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+yarn или npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Теперь можете запустить проект:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm start или yarn start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Системные требования
 
-## Learn More
+Для запуска потребуется Node.js версии 16.13.0.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Планы по доработке
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Заменить селект сортировки на попап,
+- Добавить тёмную тему, для этого нужно заменить некоторые svg-кнопки и фото кроссовок, так как они не png.
 
-### Code Splitting
+## Ссылка на GitHub Pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://Mid1i.github.io/react-sneakers/
